@@ -5,6 +5,7 @@
 <f:section name="Content">
 	<f:if condition="{movies}">
 		<f:then>
+			<p>There are currently <f:count>{movies}</f:count> movies added.</p>
 			<ul>
 				<f:for each="{movies}" as="movie">
 					<li>
