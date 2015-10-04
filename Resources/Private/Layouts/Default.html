@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title><f:render section="Title" /></title>
+		<f:base />
+	</head>
+	<body>
+
+		<header>
+			<a href="">
+				<h1>Random Movies</h1>
+			</a>
+			<p><f:link.action controller="Movie" action="new">Add a new movie</f:link.action></p>
+			<p><f:link.action action="randomMovie">Get a random movie</f:link.action></p>
+		</header>
+
+		<f:flashMessages class="flashmessages" />
+
+		<h1><f:render section="Title" /></h1>
+		<f:render section="Content" />
+	</body>
+</html>

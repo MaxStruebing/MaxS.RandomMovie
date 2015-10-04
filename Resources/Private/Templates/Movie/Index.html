@@ -1,0 +1,23 @@
+<f:layout name="Default" />
+
+<f:section name="Title">A list of movies</f:section>
+
+<f:section name="Content">
+	<f:if condition="{movies}">
+		<f:then>
+			<ul>
+				<f:for each="{movies}" as="movie">
+					<li>
+						<f:link.action action="show" arguments="{movie: movie}">{movie.title}</f:link.action>
+						<f:form action="delete" arguments="{movie: movie}">
+							<f:form.submit value="Delete" />
+						</f:form>
+					</li>
+				</f:for>
+			</ul>
+		</f:then>
+		<f:else>
+			<p>No movies created yet.</p>
+		</f:else>
+	</f:if>
+</f:section>

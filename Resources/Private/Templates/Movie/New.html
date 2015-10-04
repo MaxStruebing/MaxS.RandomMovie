@@ -1,0 +1,12 @@
+<f:layout name="Default" />
+
+<f:section name="Title">New movie</f:section>
+
+<f:section name="Content">
+	<p>Enter the IMDB-ID or the IMDB-Link of the movie you want to add:</p>
+
+	<f:form action="create" objectName="imdb">
+		<f:form.textfield name="imdb" />
+		<f:form.submit value="Create" />
+	</f:form>
+</f:section>

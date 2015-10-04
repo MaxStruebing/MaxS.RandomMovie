@@ -1,0 +1,23 @@
+-
+  name: 'index'
+  uriPattern: ''
+  defaults:
+    '@package': MaxS.RandomMovie
+    '@controller': 'Movie'
+    '@action': 'index'
+
+-
+  name: 'Create Route'
+  uriPattern: 'create'
+  defaults:
+    '@package': MaxS.RandomMovie
+    '@controller': 'Movie'
+    '@action': 'new'
+
+-
+  name: 'Random Route'
+  uriPattern: 'random'
+  defaults:
+    '@package': MaxS.RandomMovie
+    '@controller': 'Movie'
+    '@action': 'randomMovie'
