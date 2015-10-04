@@ -2,7 +2,7 @@
 namespace MaxS\RandomMovie\Domain\Service;
 
 
-class ImdbService {
+class ImdbService implements ImdbServiceInterface {
 
   /**
    * Regex definitions
@@ -40,7 +40,7 @@ class ImdbService {
     } else {
       throw new \TYPO3\Flow\Exception('Invalid IMDB-Link or ID!');
     }
-    
+
     return $matches;
   }
 
