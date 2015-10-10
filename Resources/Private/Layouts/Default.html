@@ -3,12 +3,13 @@
 	<head>
 		<meta charset="utf-8">
 		<title><f:render section="Title" /></title>
+		<link rel="stylesheet" href="<f:uri.resource path='Styles/Main.css' />" />
 		<f:base />
 	</head>
 	<body>
 
 		<header>
-			<a href="">
+			<a href="/random-movie">
 				<h1>Random Movies</h1>
 			</a>
 			<p><f:link.action controller="Movie" action="new">Add a new movie</f:link.action></p>
