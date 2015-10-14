@@ -20,12 +20,8 @@ class Movie {
 	protected $title;
 
 	/**
-	 * @var string
-	 */
-	protected $shortDescription;
-
-	/**
-	 * @var string
+	 * @ORM\Column(type="text")
+   * @var string
 	 */
 	protected $description;
 
@@ -35,7 +31,7 @@ class Movie {
 	protected $genre;
 
 	/**
-	 * @var float
+	 * @var string
 	 */
 	protected $rating;
 
@@ -52,7 +48,7 @@ class Movie {
 	/**
 	 * @var string
 	 */
-	protected $imdbID;
+	protected $link;
 
 	/**
 	 * @return string
@@ -115,21 +111,6 @@ class Movie {
 	}
 
 	/**
-	 * @return string
-	 */
-	public function getShortDescription() {
-		return $this->shortDescription;
-	}
-
-	/**
-	 * @param string $description
-	 * @return void
-	 */
-	public function setShortDescription($shortDescription) {
-		$this->shortDescription = $shortDescription;
-	}
-
-	/**
 	 * @return integer
 	 */
 	public function getMetascore() {
@@ -145,14 +126,14 @@ class Movie {
 	}
 
 	/**
-	 * @return float
+	 * @return string
 	 */
 	public function getRating() {
 		return $this->rating;
 	}
 
 	/**
-	 * @param float $imdbRating
+	 * @param string $rating
 	 * @return void
 	 */
 	public function setRating($rating) {
@@ -162,16 +143,16 @@ class Movie {
 	/**
 	 * @return string
 	 */
-	public function getImdbID() {
-		return $this->imdbID;
+	public function getLink() {
+		return $this->link;
 	}
 
 	/**
-	 * @param string $imdbId
+	 * @param string $link
 	 * @return void
 	 */
-	public function setImdbID($imdbID) {
-		$this->imdbID = $imdbID;
+	public function setLink($link) {
+		$this->link = $link;
 	}
 
 }

@@ -27,7 +27,7 @@ class MovieController extends ActionController {
 
 	/**
 	 * @Flow\Inject
-	 * @var \MaxS\RandomMovie\Domain\Service\ImdbService
+	 * @var \MaxS\RandomMovie\Domain\Service\ImdbServiceRegex
 	 */
 	protected $imdbService;
 
@@ -64,15 +64,14 @@ class MovieController extends ActionController {
 	}
 
 	/**
-	 * @param string $imdb
+	 * @param string $link
 	 * @return void
 	 */
-	public function createAction($imdb) {
-		$imdbID = $this->imdbService->extractID($imdb);
+	public function createAction($link) {
 
-		if (NULL === $this->movieRepository->findByImdbID($imdbID)->getFirst()) {
-			$newMovie = $this->imdbService->getMovieData($imdbID);
-			$newMovie['imdbID'] = $imdbID;
+		$newMovie = $this->imdbService->getMovieData($link);
+
+		if (NULL === $this->movieRepository->findByLink($newMovie['link'])->getFirst()) {
 			$newMovie = $this->setMovieProperties($newMovie);
 			$this->movieRepository->add($newMovie);
 			$this->addFlashMessage($newMovie->getTitle() . ' successfully added.');
@@ -94,12 +93,11 @@ class MovieController extends ActionController {
 		$movie = new Movie();
 
 		$movie->setTitle($newMovie['title']);
-		$movie->setShortDescription($newMovie['shortDescription']);
 		$movie->setDescription($newMovie['description']);
 		$movie->setGenre($this->buildGenreString($newMovie['genre']));
 		$movie->setMetascore($newMovie['metascore']);
 		$movie->setRating($newMovie['rating']);
-		$movie->setimdbID($newMovie['imdbID']);
+		$movie->setLink($newMovie['link']);
 		$movie->setYear($newMovie['year']);
 
 		return $movie;

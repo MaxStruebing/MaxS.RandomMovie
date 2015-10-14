@@ -2,7 +2,7 @@
 namespace MaxS\RandomMovie\Domain\Service;
 
 
-class ImdbService implements ImdbServiceInterface {
+class ImdbServiceRegex implements MovieServiceInterface {
 
   /**
    * Regex definitions
@@ -20,9 +20,13 @@ class ImdbService implements ImdbServiceInterface {
    * @param string $imdbID - the imdbID
    * @return array
    */
-  public function getMovieData($imdbID) {
-    if (($imdbContent = $this->fetchData($this->buildRequestUrl($imdbID))) !== FALSE) {
-      return $this->buildArray($imdbContent);
+  public function getMovieData($link) {
+
+    $imdbID = $this->extractID($link);
+    $requestUrl = $this->buildRequestUrl($imdbID);
+
+    if (($imdbContent = $this->fetchData($requestUrl)) !== FALSE) {
+      return $this->buildArray($imdbContent, $requestUrl);
     } else {
       throw new \TYPO3\Flow\Exception('Can\'t conntect to IMDB.');
     }
@@ -32,7 +36,7 @@ class ImdbService implements ImdbServiceInterface {
    * @param string $imdb - the imdbID or url of a movie
    * @return string
    */
-  public function extractID($imdb) {
+  protected function extractID($imdb) {
     $pattern = '/tt[0-9]{7}/';
 
     if(preg_match_all($pattern, $imdb, $matches) == 1) {
@@ -62,9 +66,10 @@ class ImdbService implements ImdbServiceInterface {
 
   /**
    * @var string $imdbContent
+   * @var string $requestUrl
    * @return array
    */
-  protected function buildArray($imdbContent) {
+  protected function buildArray($imdbContent, $requestUrl) {
     if (empty(preg_match(self::ORIGINAL_TITLE_PATTERN, $imdbContent, $matches))) {
       preg_match(self::TITLE_PATTERN, $imdbContent, $matches);
     }
@@ -81,13 +86,15 @@ class ImdbService implements ImdbServiceInterface {
     $movie['genre'] = $this->getResult($matches);
 
     preg_match(self::RATING_PATTERN, $imdbContent, $matches);
-    $movie['rating'] = $this->getResult($matches);
+    $movie['rating'] = $this->getResult($matches) . ' / 10';
 
     preg_match(self::METASCORE_PATTERN, $imdbContent, $matches);
     $movie['metascore'] = $this->getResult($matches);
 
     preg_match(self::YEAR_PATTERN, $imdbContent, $matches);
     $movie['year'] = $this->getResult($matches);
+
+    $movie['link'] = $requestUrl;
 
     return $movie;
   }
