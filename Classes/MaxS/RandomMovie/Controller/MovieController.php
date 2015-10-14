@@ -29,7 +29,7 @@ class MovieController extends ActionController {
 	 * @Flow\Inject
 	 * @var \MaxS\RandomMovie\Domain\Service\ImdbServiceRegex
 	 */
-	protected $imdbService;
+	protected $movieService;
 
 	/**
 	 * @return void
@@ -69,7 +69,7 @@ class MovieController extends ActionController {
 	 */
 	public function createAction($link) {
 
-		$newMovie = $this->imdbService->getMovieData($link);
+		$newMovie = $this->movieService->getMovieData($link);
 
 		if (NULL === $this->movieRepository->findByLink($newMovie['link'])->getFirst()) {
 			$newMovie = $this->setMovieProperties($newMovie);
