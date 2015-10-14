@@ -80,7 +80,7 @@ class MovieController extends ActionController {
 			$this->addFlashMessage('Movie already exists');
 		}
 
-		$this->redirectToUri('/');
+		$this->redirect('index');
 	}
 
 	/**
@@ -133,7 +133,7 @@ class MovieController extends ActionController {
 	public function updateAction(Movie $movie) {
 		$this->movieRepository->update($movie);
 		$this->addFlashMessage('Updated the movie.');
-		$this->redirectToUri('/');
+		$this->redirect('index');
 	}
 
 	/**
@@ -143,7 +143,7 @@ class MovieController extends ActionController {
 	public function deleteAction(Movie $movie) {
 		$this->movieRepository->remove($movie);
 		$this->addFlashMessage('Successfully deleted ' . $movie->getTitle());
-		$this->redirectToUri('/');
+		$this->redirect('index');
 	}
 
 }
